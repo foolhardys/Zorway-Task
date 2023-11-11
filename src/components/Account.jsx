@@ -5,6 +5,12 @@ import TimeTable from "../SubRoutes/TimeTable";
 
 const Account = () => {
 
+
+    // Inside the Account component
+    console.log('Rendering Account component');
+
+
+
     return (
         <section>
             <Navbar />

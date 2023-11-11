@@ -19,7 +19,7 @@ const Navbar = () => {
         { name: 'Timetable', href: '/account/timetable', current: false },
         { name: 'Marksheets', href: '/account/marksheet', current: false },
         { name: 'Calendar', href: '/account/calendar', current: false },
-      ];
+    ];
 
     function classNames(...classes) {
         return classes.filter(Boolean).join(' ')
@@ -34,7 +34,7 @@ const Navbar = () => {
                         <div className="relative flex h-16 items-center justify-between">
                             <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                                 {/* Mobile menu button*/}
-                                <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                                <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white shadow-md ">
                                     <span className="absolute -inset-0.5" />
                                     <span className="sr-only">Open main menu</span>
                                     {open ? (
@@ -59,8 +59,8 @@ const Navbar = () => {
                                                 key={item.name}
                                                 to={item.href}
                                                 className={classNames(
-                                                    item.current ? 'bg-gray-800 text-white shadow-md' : 'text-gray-700 hover:bg-gray-700 hover:text-white',
-                                                    'rounded-sm px-3 py-2 text-sm font-medium'
+                                                    item.current ? 'bg-gray-800 text-white shadow-md' : 'text-gray-800 hover:bg-gray-800 hover:text-white',
+                                                    'rounded-sm px-3 py-2 text-md font-medium'
                                                 )}
                                                 aria-current={item.current ? 'page' : undefined}
                                             >
@@ -122,16 +122,6 @@ const Navbar = () => {
                                                     </Link>
                                                 )}
                                             </Menu.Item>
-                                            {/* <Menu.Item>
-                                                {({ active }) => (
-                                                    <button
-                                                        onClick={logout(user)}
-                                                        className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                                                    >
-                                                        Sign out
-                                                    </button>
-                                                )}
-                                            </Menu.Item> */}
                                         </Menu.Items>
                                     </Transition>
                                 </Menu>
@@ -147,7 +137,7 @@ const Navbar = () => {
                                     as="a"
                                     href={item.href}
                                     className={classNames(
-                                        item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                                        item.current ? 'bg-gray-900 text-white' : 'text-gray-800 hover:bg-gray-800 hover:text-white',
                                         'block rounded-md px-3 py-2 text-base font-medium'
                                     )}
                                     aria-current={item.current ? 'page' : undefined}

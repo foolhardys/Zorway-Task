@@ -17,26 +17,33 @@ function App() {
   return (
     <div>
       <AuthContextProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path='/' element={<Login />} />
-          <Route path='/signup' element={<Signup />} />
-          <Route
-            path='/account'
-            element={
-              <ProtectedRoute>
-                <Account>
-                  <Route path='/account' element={<Home />} />
-                  <Route path='/account/timetable' element={<TimeTable />} />
-                  <Route path='/account/marksheet' element={<Marksheet />} />
-                  <Route path='/account/calendar' element={<Calendar />} />
-                  <Route path='/account/profile' element={<Profile />} />
-                  <Route path='/account/settings' element={<Settings />} />
-                </Account>
-              </ProtectedRoute>
-            } />
-
-        </Routes>
+        <BrowserRouter>
+          <Routes>
+            <Route path='/' element={<Login />} />
+            <Route path='/signup' element={<Signup />} />
+            {/* <Route
+              path='/account/*'
+              element={
+                <ProtectedRoute>
+                  <Account>
+                    <Route index element={<Home />} />
+                    <Route path='timetable' element={<TimeTable />} />
+                    <Route path='marksheet' element={<Marksheet />} />
+                    <Route path='calendar' element={<Calendar />} />
+                    <Route path='profile' element={<Profile />} />
+                    <Route path='settings' element={<Settings />} />
+                  </Account>
+                </ProtectedRoute>
+              } /> */}
+            <Route path='/account' element={<ProtectedRoute><Account /></ProtectedRoute>}>
+              <Route index element={<Home />} />
+              <Route path='timetable' element={<TimeTable />} />
+              <Route path='marksheet' element={<Marksheet />} />
+              <Route path='calendar' element={<Calendar />} />
+              <Route path='profile' element={<Profile />} />
+              <Route path='settings' element={<Settings />} />
+            </Route>
+          </Routes>
         </BrowserRouter>
       </AuthContextProvider>
     </div>

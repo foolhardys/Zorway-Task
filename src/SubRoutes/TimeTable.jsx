@@ -1,9 +1,12 @@
-import Navbar from "./Navbar"
-
 const TimeTable = () => {
+
+  // Inside the TimeTable component
+  console.log('Rendering TimeTable component');
+
+
   return (
     <div>
-      <Navbar/>
+      timetable
     </div>
   )
 }
