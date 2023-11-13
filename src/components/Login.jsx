@@ -87,6 +87,7 @@ export default function Example() {
               >
                 Sign in
               </button>
+              {error && <p style={{ color: 'red' }}>{error}</p>}
             </div>
           </form>
 
