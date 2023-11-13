@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import { updatePassword, EmailAuthProvider, reauthenticateWithCredential } from 'firebase/auth';
 import { auth } from '../firebase';
+import { useNavigate } from 'react-router-dom';
 
 const ChangePassword = () => {
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [error, setError] = useState(null);
+
+
+  const navigate = useNavigate()
 
   const handleChangePassword = async () => {
     try {
@@ -17,6 +21,8 @@ const ChangePassword = () => {
       // Update the user's password
       await updatePassword(user, newPassword);
       console.log('Password updated successfully');
+      alert('Password changed')
+      navigate('/account')
     } catch (error) {
       console.error('Error changing password:', error.message);
       setError(error.message);
