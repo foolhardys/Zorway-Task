@@ -1,9 +1,45 @@
 import { Link } from 'react-router-dom'
 import { UserAuth } from '../context/AuthContext'
+import { useState, useEffect } from 'react'
 
 const Profile = () => {
+  
+  const [item, setItem] = useState({})
 
-  const { user } = UserAuth()
+  const { user, getDataFromFirebase, data } = UserAuth()
+
+  useEffect(() => {
+    getDataFromFirebase()
+
+  }, []);
+
+  useEffect(() => {
+    if (data) {
+      const entries = Object.entries(data);
+
+      entries.sort((a, b) => {
+        const emailA = a[1].email.toLowerCase();
+        const emailB = b[1].email.toLowerCase();
+        return emailA.localeCompare(emailB);
+      });
+
+      // Find the object with the specified email
+      const desiredEmail = "siddhantrsen73938@gmail.com";
+      const userWithEmail = entries.find(
+        (item) => item[1].email === desiredEmail
+      );
+
+      console.log(userWithEmail);
+      // item = userWithEmail
+      setItem(userWithEmail[1]);
+    }
+  }, [data]);
+
+  console.log(item);
+
+
+
+
 
   return (
     <div className='flex justify-center items-center min-h-screen'>
@@ -16,15 +52,19 @@ const Profile = () => {
           <dl className="divide-y divide-gray-100">
             <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
               <dt className="text-md font-medium leading-6 text-gray-900">Full name</dt>
-              <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">Siddhant R Sen</dd>
+              <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{item.name}</dd>
             </div>
             <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
               <dt className="text-md font-medium leading-6 text-gray-900">Branch</dt>
-              <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">Mechanical section 1</dd>
+              <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{item.branch}</dd>
+            </div>
+            <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+              <dt className="text-md font-medium leading-6 text-gray-900">Section</dt>
+              <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{item.section}</dd>
             </div>
             <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
               <dt className="text-md font-medium leading-6 text-gray-900">Email address</dt>
-              <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{user.email}</dd>
+              <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{item.email}</dd>
             </div>
             <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
               <dt className="text-md font-medium leading-6 text-gray-900">UID</dt>
@@ -32,15 +72,11 @@ const Profile = () => {
             </div>
             <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
               <dt className="text-md font-medium leading-6 text-gray-900">Year</dt>
-              <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">2</dd>
+              <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{item.year}</dd>
             </div>
             <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-              <dt className="text-md font-medium leading-6 text-gray-900">About</dt>
-              <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                Fugiat ipsum ipsum deserunt culpa aute sint do nostrud anim incididunt cillum culpa consequat. Excepteur
-                qui ipsum aliquip consequat sint. Sit id mollit nulla mollit nostrud in ea officia proident. Irure nostrud
-                pariatur mollit ad adipisicing reprehenderit deserunt qui eu.
-              </dd>
+              <dt className="text-md font-medium leading-6 text-gray-900">Phone number</dt>
+              <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{item.phone}</dd>
             </div>
             <div className=' flex justify-start gap-10 items-center'>
               <Link to='/account/settings'

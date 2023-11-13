@@ -21,7 +21,6 @@ const Home = () => {
           Update Profile
         </Link>
       </div>
-
     </section>
   )
 }

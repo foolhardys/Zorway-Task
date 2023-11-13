@@ -11,6 +11,7 @@ import Marksheet from './SubRoutes/Marksheet'
 import Calendar from './SubRoutes/Calendar'
 import Profile from './SubRoutes/Profile'
 import Settings from './SubRoutes/Settings'
+import ChangePassword from './SubRoutes/ChangePassword'
 
 function App() {
 
@@ -42,6 +43,7 @@ function App() {
               <Route path='calendar' element={<Calendar />} />
               <Route path='profile' element={<Profile />} />
               <Route path='settings' element={<Settings />} />
+              <Route path='changepassword' element={<ChangePassword />} />
             </Route>
           </Routes>
         </BrowserRouter>

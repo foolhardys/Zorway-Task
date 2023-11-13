@@ -9,7 +9,7 @@ import {
     updatePassword
 } from 'firebase/auth';
 import { auth, database } from '../firebase';
-import { ref, set } from 'firebase/database';
+import { ref, set, get } from 'firebase/database';
 
 const UserContext = createContext();
 
@@ -82,6 +82,27 @@ export const AuthContextProvider = ({ children }) => {
         }
     };
 
+
+    const [data, setData] = useState(null)
+
+
+    const getDataFromFirebase = async () => {
+        const dataRef = ref(database, 'UserData');
+        try {
+          const snapshot = await get(dataRef);
+          if (snapshot.exists()) {
+            setData(snapshot.val())
+            return snapshot.val();
+          } else {
+            console.log('No data available');
+            return null;
+          }
+        } catch (error) {
+          console.error('Error getting data from Firebase:', error.message);
+          return null;
+        }
+      };
+
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser);
@@ -92,7 +113,7 @@ export const AuthContextProvider = ({ children }) => {
     }, []);
 
     return (
-        <UserContext.Provider value={{ registerUser, user, logout, logIn, updateUser }}>
+        <UserContext.Provider value={{ registerUser, user, logout, logIn, updateUser, getDataFromFirebase , data }}>
             {children}
         </UserContext.Provider>
     );
