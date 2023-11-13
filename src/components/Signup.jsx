@@ -10,19 +10,19 @@ const Signup = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
-    const { createUser } = UserAuth();
+    const { registerUser } = UserAuth();
     const navigate = useNavigate()
-  
+
     const handleSubmit = async (e) => {
-      e.preventDefault();
-      setError('');
-      try {
-        await createUser(email, password);
-        navigate('/account')
-      } catch (e) {
-        setError(e.message);
-        console.log(e.message);
-      }
+        e.preventDefault();
+        setError('');
+        try {
+            await registerUser(email, password);
+            navigate('/account')
+        } catch (e) {
+            setError(e.message);
+            console.log(e.message);
+        }
     };
 
     return (
@@ -45,6 +45,7 @@ const Signup = () => {
                 <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
                     <form className="space-y-6" onSubmit={handleSubmit}>
                         <div>
+                            <h4 className='text-sm bg-red-700 text-white'>{error}</h4>
                             <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
                                 Email address
                             </label>
@@ -73,7 +74,7 @@ const Signup = () => {
                                     type="password"
                                     autoComplete="current-password"
                                     required
-                                    onChange={(e)=> setPassword(e.target.value)}
+                                    onChange={(e) => setPassword(e.target.value)}
                                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 p-2"
                                 />
                             </div>
