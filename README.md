@@ -7,7 +7,12 @@ This project involves using Firebase as a hosted backend for  frontend React app
 
 To deploy this project run
 
-```bash
+```terminal
+npm install
+
+```
+
+```terminal
   npm run dev
 ```
 
